@@ -1,16 +1,40 @@
 import Layout from "./Layout";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
-import HomePage from "./pages/HomePage";
+import CharactersPage from "./pages/CharactersPage";
+
+import CharacterDetailPage from "./pages/CharacterDetailPage";
+import { getCharacterById, getCharacters } from "./api/character-api";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const routes = [
     {
         path: "/",
         element: <Layout />,
         children: [
-            { path: "/", element: <HomePage /> },
-            { path: "/about", element: <AboutPage /> },
-            { path: "/contact", element: <ContactPage /> },
+            {
+                path: "/",
+                element: <CharactersPage />,
+                loader: () => getCharacters(),
+            },
+            {
+                path: "/characters/:id",
+                element: <CharacterDetailPage />,
+                loader: ({ params }) => getCharacterById(params.id),
+            },
+            { 
+                path: "/about", 
+                element: <AboutPage /> 
+            },
+            { 
+                path: "/contact", 
+                element: <ContactPage /> 
+            },
+            ,
+            {
+                path: "/*",
+                element: <NotFoundPage />,
+            }
         ],
     },
 ];

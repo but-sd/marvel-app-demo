@@ -23,6 +23,11 @@ li {
     border-bottom: 1px solid #ccc;
 }
 
+li a {
+    color: #333;
+    text-decoration: none;
+}
+
 a.active {
     color: red;
 }

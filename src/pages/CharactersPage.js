@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CharactersList } from "../components/CharactersList";
 import { NumberOfCharacters } from "../components/NumberOfCharacters";
 
-const characters = require('../data/characters.json');
+import { useLoaderData } from 'react-router';
 
-const HomePage = () => {
+const CharactersPage = () => {
+
+    useEffect(() => {
+        document.title = "Marvel App";
+    }, []);
+
+    // retrieve the characters using the useLoaderData hook
+    const characters = useLoaderData();
+
     return (
         <>
             <h2>Marvel Characters</h2>
@@ -15,4 +23,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default CharactersPage;
