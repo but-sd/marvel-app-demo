@@ -30,7 +30,6 @@ const routes = [
                 path: "/contact", 
                 element: <ContactPage /> 
             },
-            ,
             {
                 path: "/*",
                 element: <NotFoundPage />,
