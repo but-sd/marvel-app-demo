@@ -22,10 +22,10 @@ const routes = [
                 element: <CharacterDetailPage />,
                 loader: ({ params }) => getCharacterById(params.id),
             },
-            // { 
-            //     path: "/about", 
-            //     element: <AboutPage /> 
-            // },
+            { 
+                path: "/about", 
+                element: <AboutPage /> 
+            },
             { 
                 path: "/contact", 
                 element: <ContactPage /> 
