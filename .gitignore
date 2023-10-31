@@ -1,3 +1,8 @@
+# Ignore node_modules because it's huge and we don't need it, it will be installed by npm
 node_modules
 
+# Ignore build because it's generated with npm run build
 build
+
+# Ignore coverage because it's generated with npm run test:coverage
+coverage
