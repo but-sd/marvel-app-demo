@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ContactPage = () => {
+    useEffect(() => {
+        document.title = "Contact | Marvel App";
+    }, []);
+
     return (
         <>
             <h2>Contact Us</h2>
