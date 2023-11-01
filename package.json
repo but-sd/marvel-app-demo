@@ -7,7 +7,7 @@
     "start-html-version": "browser-sync start --config bs-config.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
@@ -50,6 +50,14 @@
     "coveragePathIgnorePatterns" : [
       "/src/index.js",
       "/src/reportWebVitals.js"
-    ]
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
   }
 }
