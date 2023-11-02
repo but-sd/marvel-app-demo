@@ -1,6 +1,17 @@
 const { getCharacters, getCharacterById } = require('./character-api');
 const fs = require('fs');
 
+function expectCharactersSortedByName(characters, expected) {
+  expect(Array.isArray(characters)).toBe(true);
+  expect(characters.length).toBe(expected.length);
+
+  // expect the characters to be sorted by name, so that the first character is Beast
+  expect(characters[0].name).toBe('Beast');
+
+  // expect the characters to be sorted by name, so that the last character is Zzzax
+  expect(characters[characters.length - 1].name).toBe('Wolverine');
+}
+
 describe('character-api', () => {
   const expected = JSON.parse(fs.readFileSync('src/data/characters.json', 'utf8'));
 
@@ -11,15 +22,8 @@ describe('character-api', () => {
       // then
       const characters = getCharacters();
 
-      // expect an array of characters with the same length as the expected array
-      expect(Array.isArray(characters)).toBe(true);
-      expect(characters.length).toBe(expected.length);
-
-      // expect the characters to be sorted by name, so that the first character is Beast
-      expect(characters[0].name).toBe('Beast');
-
-      // expect the characters to be sorted by name, so that the last character is Zzzax
-      expect(characters[characters.length - 1].name).toBe('Wolverine');
+      // expect characters to be sorted by name in ascending order
+      expectCharactersSortedByName(characters, expected);
     });
 
 
@@ -29,15 +33,8 @@ describe('character-api', () => {
       // then
       const characters = getCharacters('name', 'asc');
 
-      // expect an array of characters with the same length as the expected array
-      expect(Array.isArray(characters)).toBe(true);
-      expect(characters.length).toBe(expected.length);
-
-      // expect the characters to be sorted by name, so that the first character is Beast
-      expect(characters[0].name).toBe('Beast');
-
-      // expect the characters to be sorted by name, so that the last character is Zzzax
-      expect(characters[characters.length - 1].name).toBe('Wolverine');
+      // expect characters to be sorted by name in ascending order
+      expectCharactersSortedByName(characters, expected);
     });
 
     test('returns an array of characters sorted by name in descending order', () => {
@@ -152,3 +149,5 @@ describe('character-api', () => {
     });
   });
 });
+
+
