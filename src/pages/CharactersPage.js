@@ -16,6 +16,7 @@ const CharactersPage = () => {
     return (
         <>
             <h2>Marvel Characters</h2>
+            <button onClick={() => { alert("Will sort list")}}>sort</button>
             <CharactersList characters={characters} />
             <br />
             <NumberOfCharacters characters={characters} />
