@@ -1,19 +1,115 @@
 const { getCharacters, getCharacterById } = require('./character-api');
 const fs = require('fs');
 
+function expectCharactersSortedByNameAsc(characters, expected) {
+  expect(Array.isArray(characters)).toBe(true);
+  expect(characters.length).toBe(expected.length);
+
+  // expect the characters to be sorted by name, so that the first character is Beast
+  expect(characters[0].name).toBe('Beast');
+
+  // expect the characters to be sorted by name, so that the last character is Zzzax
+  expect(characters[characters.length - 1].name).toBe('Wolverine');
+}
+
+function expectCharactersSortedByNameDesc(characters, expected) {
+  expect(Array.isArray(characters)).toBe(true);
+  expect(characters.length).toBe(expected.length);
+
+  // expect the characters to be sorted by name, so that the first character is Beast
+  expect(characters[0].name).toBe('Wolverine');
+
+  // expect the characters to be sorted by name, so that the last character is Zzzax
+  expect(characters[characters.length - 1].name).toBe('Beast');
+}
+
+function expectCharactersSortedByModifiedAsc(characters, expected) {
+  expect(Array.isArray(characters)).toBe(true);
+  expect(characters.length).toBe(expected.length);
+
+  // expect the characters to be sorted by name, so that the first character is Beast
+  expect(characters[0].name).toBe('Groot');
+
+  // expect the characters to be sorted by name, so that the last character is Zzzax
+  expect(characters[characters.length - 1].name).toBe('Hulk');
+}
+
+function expectCharactersSortedByModifiedDesc(characters, expected) {
+  expect(Array.isArray(characters)).toBe(true);
+  expect(characters.length).toBe(expected.length);
+
+  // expect the characters to be sorted by name, so that the first character is Beast
+  expect(characters[0].name).toBe('Hulk');
+
+  // expect the characters to be sorted by name, so that the last character is Zzzax
+  expect(characters[characters.length - 1].name).toBe('Groot');
+}
+
 describe('character-api', () => {
   const expected = JSON.parse(fs.readFileSync('src/data/characters.json', 'utf8'));
 
   describe('getCharacters', () => {
-    test('returns an array of characters', () => {
+    test('returns an array of characters sorted by default', () => {
       // when
 
       // then
       const characters = getCharacters();
 
-      // expect
-      expect(Array.isArray(characters)).toBe(true);
-      expect(characters.length).toBe(expected.length);
+      // expect characters to be sorted by name in ascending order
+      expectCharactersSortedByNameAsc(characters, expected);
+    });
+
+
+    test('returns an array of characters sorted by name in ascending order', () => {
+      // when
+
+      // then
+      const characters = getCharacters('name', 'asc');
+
+      // expect characters to be sorted by name in ascending order
+      expectCharactersSortedByNameAsc(characters, expected);
+    });
+
+    test('returns an array of characters sorted by name in descending order', () => {
+      // when
+
+      // then
+      const characters = getCharacters('name', 'desc');
+
+      // expect characters to be sorted by name in descending order
+      expectCharactersSortedByNameDesc(characters, expected);
+    });
+
+    test('returns an array of characters sorted by modified in ascending order', () => {
+      // when
+
+      // then
+      const characters = getCharacters('modified', 'asc');
+
+      // expect characters to be sorted by modified in ascending order
+      expectCharactersSortedByModifiedAsc(characters, expected);
+    });
+
+    test('returns an array of characters sorted by modified in descending order', () => {
+      // when
+
+      // then
+      const characters = getCharacters('modified', 'desc');
+
+      // expect characters to be sorted by modified in descending order
+      expectCharactersSortedByModifiedDesc(characters, expected);
+    });
+
+    test('throws an error if orderBy is not name or modified', () => {
+      expect(() => {
+        getCharacters('foo');
+      }).toThrow(`Parameter orderBy must be a string ('name' or 'modified'), but it was string foo`);
+    });
+
+    test('throws an error if order is not asc or desc', () => {
+      expect(() => {
+        getCharacters('name', 'foo');
+      }).toThrow(`Parameter order must be a string ('asc' or 'desc'), but it was string foo`);
     });
 
   });
@@ -65,3 +161,5 @@ describe('character-api', () => {
     });
   });
 });
+
+
